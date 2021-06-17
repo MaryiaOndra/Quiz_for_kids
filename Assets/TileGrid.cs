@@ -6,12 +6,15 @@ public class TileGrid : MonoBehaviour
 {
     [SerializeField]
     GameObject tilePrefab;
-    //[SerializeField]
-    //Transform rootTr;
+    [SerializeField]
+    Transform rootTr;
 
     public List<Tile> Tiles { get; private set; }
     public Vector2Int Size { get; private set; }
     public Tile[,] TilesArray { get; private set; }
+
+    float rootFitterY = 0.5f;
+    float rootFitterX = 0.5f;
 
     public void Generate(Vector2Int _size)
     {
@@ -28,7 +31,7 @@ public class TileGrid : MonoBehaviour
         {
             for (int y = 0; y < _size.y; y++)
             {
-                var _tile = Instantiate(tilePrefab, transform).GetComponent<Tile>();
+                var _tile = Instantiate(tilePrefab, rootTr).GetComponent<Tile>();
                 _tile.SetPosition(new Vector2Int(x, y));
 
                 TilesArray[x, y] = _tile;
@@ -36,7 +39,12 @@ public class TileGrid : MonoBehaviour
             }
         }
 
-        transform.position = new Vector3(-_size.x / 2f, -_size.y / 2f);
+        if (_size.y == 1)
+            rootFitterY = 0;
+        else
+            rootFitterY = rootFitterX;
+
+            rootTr.localPosition = new Vector3(-_size.x * rootFitterX, -_size.y * rootFitterY);
     }
 
     void SetContent() 
