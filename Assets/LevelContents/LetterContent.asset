@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2393ae0c8d83e104b84fc99aeda2b1ce, type: 3}
+  m_Name: LetterContent
+  m_EditorClassIdentifier: 
+  tilesContents:
+  - value: A
+    tileSprite: {fileID: 4963718625464178563, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: B
+    tileSprite: {fileID: 7783457984840754399, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: K
+    tileSprite: {fileID: -1127063002332224934, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: C
+    tileSprite: {fileID: 3234300448368640894, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: D
+    tileSprite: {fileID: 7911670913450602933, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: E
+    tileSprite: {fileID: 4652326554734856401, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: F
+    tileSprite: {fileID: -6426668015567183463, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: G
+    tileSprite: {fileID: 216406037199867053, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: J
+    tileSprite: {fileID: -2756605603065543306, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: I
+    tileSprite: {fileID: -3541686595128163680, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: H
+    tileSprite: {fileID: -8235857483100294123, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
