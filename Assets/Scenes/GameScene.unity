@@ -559,8 +559,8 @@ RectTransform:
   m_Father: {fileID: 1020329378}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.85}
-  m_AnchorMax: {x: 1, y: 0.95}
+  m_AnchorMin: {x: 0, y: 0.9}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
@@ -595,6 +595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilesContents:
   - {fileID: 11400000, guid: f6feb3ca65178bd4fb5ff34f7a95b00c, type: 2}
+  - {fileID: 11400000, guid: 8a9aab2dd2c810047baf07ef434709a3, type: 2}
   levelConfigs:
   - levelNbr: 1
     gridSize: {x: 3, y: 1}

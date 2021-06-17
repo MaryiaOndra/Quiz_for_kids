@@ -6,12 +6,12 @@ using UnityEngine;
 public class GameInfo : MonoBehaviour
 {
     [SerializeField]
-    List<TilesContentConfig> tilesContents;
+    List<TilesConfigs> tilesContents;
 
     [SerializeField]
     List<LevelConfig> levelConfigs;
 
-    public List<TilesContentConfig> TilesContents => tilesContents;
+    public List<TilesConfigs> TilesContents => tilesContents;
     public List<LevelConfig> LevelConfigs => levelConfigs;
 }
 

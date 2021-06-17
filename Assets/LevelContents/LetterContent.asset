@@ -13,23 +13,25 @@ MonoBehaviour:
   m_Name: LetterContent
   m_EditorClassIdentifier: 
   tilesContents:
-  - value: 
-    tileSprite: {fileID: 0}
-  - value: 
-    tileSprite: {fileID: 0}
-  - value: 
-    tileSprite: {fileID: 0}
-  - value: 
-    tileSprite: {fileID: 0}
-  - value: 
-    tileSprite: {fileID: 0}
-  - value: 
-    tileSprite: {fileID: 0}
-  - value: 
-    tileSprite: {fileID: 0}
-  - value: 
-    tileSprite: {fileID: 0}
-  - value: 
-    tileSprite: {fileID: 0}
-  - value: 
-    tileSprite: {fileID: 0}
+  - value: A
+    tileSprite: {fileID: 4963718625464178563, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: B
+    tileSprite: {fileID: 7783457984840754399, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: K
+    tileSprite: {fileID: -1127063002332224934, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: C
+    tileSprite: {fileID: 3234300448368640894, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: D
+    tileSprite: {fileID: 7911670913450602933, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: E
+    tileSprite: {fileID: 4652326554734856401, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: F
+    tileSprite: {fileID: -6426668015567183463, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: G
+    tileSprite: {fileID: 216406037199867053, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: J
+    tileSprite: {fileID: -2756605603065543306, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: I
+    tileSprite: {fileID: -3541686595128163680, guid: 17b66dae11cf77c448740db54117ef03, type: 3}
+  - value: H
+    tileSprite: {fileID: -8235857483100294123, guid: 17b66dae11cf77c448740db54117ef03, type: 3}

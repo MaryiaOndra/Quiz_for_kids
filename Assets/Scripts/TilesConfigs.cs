@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "My Levels Config", menuName = "Quiz/Create level Config")]
-public class TilesContentConfig : ScriptableObject
+public class TilesConfigs : ScriptableObject
 {
     [SerializeField]
     List<TileContent> tilesContents;
