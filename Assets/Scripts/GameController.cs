@@ -16,22 +16,42 @@ public class GameController : MonoBehaviour
     TMP_Text valueText;
 
     int level = 0;
+
+    int prevRandomTile;
     Vector2Int gridSize;
 
     List<TileContent> levelTilesContent;
+
     char targetValue;
+    List<char> UsedTiles = new List<char>();
 
     private void Start()
+    {
+        StartGame();
+    }
+
+    private void StartGame()
     {
        gridSize = gameInfo.LevelConfigs[level].GridSize;
        tileGrid.Generate(gridSize);
 
-        Debug.Log("tileGrid.Tiles.Count : " + tileGrid.Tiles.Count);
-
-       ChooseTileContent(gameInfo.LevelConfigs[level].TilesContents, tileGrid.Tiles.Count);
+       ChooseTileContent(gameInfo.TilesContents, tileGrid.Tiles.Count);
        SetTilesContent(tileGrid.Tiles, levelTilesContent);
 
        SetTargetValue(tileGrid.Tiles);
+
+        tileGrid.Tiles.ForEach(_tile => _tile.TilePressedAction = CheckTileValue);
+    }
+
+    void CheckTileValue(char _value)
+    {
+        if (_value == targetValue)
+        {
+            level++;
+            StartGame();
+        }
+        else
+            Debug.Log("WRONG");
     }
 
     void ChooseTileContent(List<TileContent> _tileContents, int _tilesAmount) 
@@ -41,9 +61,11 @@ public class GameController : MonoBehaviour
         levelTilesContent = new List<TileContent>();
 
         for (int i = 0; i < _tilesAmount; i++)
-        {
-            int _randTile = UnityEngine.Random.Range(0, _contentAmount);
-            levelTilesContent.Add(gameInfo.LevelConfigs[level].TilesContents[_randTile]);
+        {            
+            int _randomTile = UnityEngine.Random.Range(0, _contentAmount);
+
+            levelTilesContent.Add(gameInfo.LevelConfigs[level].TilesContents[_randomTile]);
+            prevRandomTile = _randomTile;
         }
     }
 
@@ -59,5 +81,6 @@ public class GameController : MonoBehaviour
     {
         targetValue = levelTilesContent[UnityEngine.Random.Range(0, levelTilesContent.Count)].Value;
         valueText.text = targetValue.ToString();
+        UsedTiles.Add(targetValue);
     }
 }

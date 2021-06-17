@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,9 @@ public class Tile : MonoBehaviour
 
     [SerializeField]
     SpriteRenderer tileSpriteRndr;
-       
+
+    public Action<char> TilePressedAction;
+
     public char TileValue { get; private set; }
 
     public void SetTileContent(TileContent _tileContent)
@@ -20,5 +23,10 @@ public class Tile : MonoBehaviour
     public void SetPosition(Vector2Int _position) 
     {
         transform.localPosition = new Vector3(_position.x * FIT_DELAY, _position.y * FIT_DELAY);
+    }
+
+    public void OnPressed() 
+    {
+        TilePressedAction.Invoke(TileValue);
     }
 }

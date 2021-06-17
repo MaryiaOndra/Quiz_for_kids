@@ -6,8 +6,12 @@ using UnityEngine;
 public class GameInfo : MonoBehaviour
 {
     [SerializeField]
+    List<TilesContent> tilesContent;
+
+    [SerializeField]
     List<LevelConfig> levelConfigs;
 
+    public List<TilesContent> TilesContents => tilesContent;
     public List<LevelConfig> LevelConfigs => levelConfigs;
 }
 
@@ -15,29 +19,11 @@ public class GameInfo : MonoBehaviour
 public class LevelConfig
 {
     [SerializeField]
-    int level;
+    int levelNbr;
 
     [SerializeField]
     Vector2Int gridSize;
 
-    [SerializeField]
-    List<TileContent> tilesContents;
-
-    public int Level => level;
     public Vector2Int GridSize => gridSize;
-    public List<TileContent> TilesContents => tilesContents;
-}
-
-[Serializable]
-public class TileContent 
-{
-    [SerializeField]
-    char value;
-
-    [SerializeField]
-    Sprite tileSprite;
-
-    public char Value => value;
-    public Sprite TileSprite => tileSprite;
-
+    public int LevelNbr => levelNbr;
 }
