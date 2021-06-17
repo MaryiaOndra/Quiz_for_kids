@@ -55,12 +55,6 @@ public class GameController : MonoBehaviour
         _tilesContentFiller.GenerateTileContent();
         targetIndexes.Add(_tilesContentFiller.SetTargetValue(targetIndexes));
 
-        foreach (var item in targetIndexes)
-        {
-            Debug.Log("targetIndexes:   " + item);
-        }
-
-
         targetValue = _tilesContentFiller.TargetValue;
         valueText.text = targetValue;
 

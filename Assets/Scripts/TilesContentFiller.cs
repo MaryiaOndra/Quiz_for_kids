@@ -58,6 +58,7 @@ public class TilesContentFiller
 
         while (_targetIndexes.Contains(_tileIndex))
         {
+            Debug.Log("ITS REAPEATING");
             _randomTileNmbr = Random.Range(0, tileNumbers.Count);
             _tileIndex = tileNumbers[_randomTileNmbr];
         } 
