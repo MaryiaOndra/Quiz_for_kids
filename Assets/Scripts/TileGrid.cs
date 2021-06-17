@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,10 +43,13 @@ public class TileGrid : MonoBehaviour
             rootFitterY = rootFitterX;
 
             rootTr.localPosition = new Vector3(-_size.x * rootFitterX, -_size.y * rootFitterY);
+
+        gameObject.SetActive(false);
     }
 
-    void SetContent() 
+    public void Appear() 
     {
-    
+        gameObject.SetActive(true);
+        transform.DOPunchScale(Vector3.one * 0.5f, 1f, 3, 1).SetDelay(0.1f);
     }
 }

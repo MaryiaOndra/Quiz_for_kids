@@ -15,7 +15,10 @@ public class GameController : MonoBehaviour
     TileGrid tileGrid;
 
     [SerializeField]
-    TMP_Text valueText;
+    TextPanel textPanel; 
+    
+    [SerializeField]
+    LoadingPanel loadingPanel;
 
     [SerializeField]
     RestartPanel restartPanel;
@@ -29,11 +32,26 @@ public class GameController : MonoBehaviour
     List<string> UsedTiles = new List<string>();
     List<int> targetIndexes = new List<int>();
 
-    private void Start()
+    void Start()
     {
-        StartGame();
+        gridSize = gameInfo.LevelConfigs[level].GridSize;
+        tileGrid.Generate(gridSize);
+        tileGrid.Tiles.ForEach(_tile => _tile.TilePressedAction = CheckTileValue);
+        tileGrid.Tiles.ForEach(_tile => _tile.NextLevelAction = SceneLaunch);
 
-        restartPanel.RestartAction = RestartGame;
+        restartPanel.RestartAction = loadingPanel.FadeIn;
+        loadingPanel.UnLoadScreenAction = RestartGame;
+        loadingPanel.LoadScreenAction = TilesAppearing;
+
+        SceneLaunch();
+
+        loadingPanel.FadeOut();
+    }
+
+    void TilesAppearing() 
+    {
+        tileGrid.Appear();
+        textPanel.Appear();
     }
 
     void RestartGame()
@@ -41,37 +59,39 @@ public class GameController : MonoBehaviour
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 
-    private void StartGame()
+    void SceneLaunch()
     {
-        gridSize = gameInfo.LevelConfigs[level].GridSize;
-        tileGrid.Generate(gridSize);
-        tileGrid.Tiles.ForEach(_tile => _tile.TilePressedAction = CheckTileValue);
-        var _levelTiles = tileGrid.Tiles;
+        if (level > gameInfo.LevelConfigs.Count - 1)
+        {
+            restartPanel.Activate();
+        }
+        else 
+        {
+            var _levelTiles = tileGrid.Tiles;
 
-        int _numOfConfig = UnityEngine.Random.Range(0, gameInfo.LevelConfigs.Count - 1);
-        List<TileContent> _tilesContents = gameInfo.TilesContents[_numOfConfig].TilesContents;
+            int _numOfConfig = UnityEngine.Random.Range(0, gameInfo.LevelConfigs.Count - 1);
+            List<TileContent> _tilesContents = gameInfo.TilesContents[_numOfConfig].TilesContents;
 
-        TilesContentFiller _tilesContentFiller = new TilesContentFiller(_tilesContents, _levelTiles);
-        _tilesContentFiller.GenerateTileContent();
-        targetIndexes.Add(_tilesContentFiller.SetTargetValue(targetIndexes));
+            TilesContentFiller _tilesContentFiller = new TilesContentFiller(_tilesContents, _levelTiles);
+            _tilesContentFiller.GenerateTileContent();
+            targetIndexes.Add(_tilesContentFiller.SetTargetValue(targetIndexes));
 
-        targetValue = _tilesContentFiller.TargetValue;
-        valueText.text = targetValue;
+            targetValue = _tilesContentFiller.TargetValue;
+            textPanel.ShowValue(targetValue);
 
-        tileGrid.Tiles.ForEach(_tile => _tile.TilePressedAction = CheckTileValue);
+        }
     }
 
-    void CheckTileValue(string _value)
+    void CheckTileValue(Tile _tile)
     {
-        if (_value == targetValue)
+        if (_tile.TileValue == targetValue)
         {
-            if (level < gameInfo.LevelConfigs.Count - 1)
-            {
-                level++;
-                StartGame();
-            }
-            else
-                restartPanel.Activate();
+            level++;
+            _tile.BounceTile();
+        }
+        else
+        {
+            _tile.ShakeTile();
         }
     }
 }

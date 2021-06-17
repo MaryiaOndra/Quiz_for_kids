@@ -21,7 +21,6 @@ public class TilesContentFiller
     internal void GenerateTileContent()
     {
         ChooseTilesAmount(gridTiles.Count);
-        //SetTargetValue();
         SetTilesContent(gridTiles);
     }
 
@@ -58,7 +57,6 @@ public class TilesContentFiller
 
         while (_targetIndexes.Contains(_tileIndex))
         {
-            Debug.Log("ITS REAPEATING");
             _randomTileNmbr = Random.Range(0, tileNumbers.Count);
             _tileIndex = tileNumbers[_randomTileNmbr];
         } 
@@ -68,23 +66,5 @@ public class TilesContentFiller
         TargetValue = tilesContents[_tileIndex].Value;
 
         return _tileIndex;
-
-       // var _randomTileNmbr = Random.Range(0, tileNumbers.Count);
-
-       //var _tileIndex = tileNumbers[_randomTileNmbr];
-
-       // if (_targetIndexes.Contains(_tileIndex))
-       // {
-       //     Debug.Log("ITS REAPEATING");
-       //     //SetTargetValue(_targetIndexes);
-       // }
-       // else
-       // {
-       //     targetNumbers.Add(_tileIndex);
-       // }
-
-       // TargetValue = tilesContents[_tileIndex].Value;
-
-       // return _tileIndex;
     }
 }
