@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64a72d8c2813aa49af52aed37c11ea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileSpriteRndr: {fileID: 7928155667926823147}
 --- !u!114 &4943542145595192813
 MonoBehaviour:
   m_ObjectHideFlags: 0

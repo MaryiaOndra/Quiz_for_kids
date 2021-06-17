@@ -1,47 +1,63 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
     [SerializeField]
     GameInfo gameInfo;
+
     [SerializeField]
     TileGrid tileGrid;
 
+    [SerializeField]
+    TMP_Text valueText;
+
     int level = 0;
     Vector2Int gridSize;
-    int tilesAmount;
-    List<TileContent> levelTiles;
-    char valueToFind;
+
+    List<TileContent> levelTilesContent;
+    char targetValue;
 
     private void Start()
     {
        gridSize = gameInfo.LevelConfigs[level].GridSize;
-       int _contentAmount = gameInfo.LevelConfigs[level].TilesContents.Count;
+       tileGrid.Generate(gridSize);
 
-        tilesAmount = gridSize.x * gridSize.y;
+        Debug.Log("tileGrid.Tiles.Count : " + tileGrid.Tiles.Count);
 
-        if (tilesAmount != 0)
+       ChooseTileContent(gameInfo.LevelConfigs[level].TilesContents, tileGrid.Tiles.Count);
+       SetTilesContent(tileGrid.Tiles, levelTilesContent);
+
+       SetTargetValue(tileGrid.Tiles);
+    }
+
+    void ChooseTileContent(List<TileContent> _tileContents, int _tilesAmount) 
+    {
+        int _contentAmount = gameInfo.LevelConfigs[level].TilesContents.Count;
+
+        levelTilesContent = new List<TileContent>();
+
+        for (int i = 0; i < _tilesAmount; i++)
         {
-            levelTiles = new List<TileContent>();
-
-            for (int i = 0; i < tilesAmount; i++)
-            {
-                int _randTile = UnityEngine.Random.Range(0, _contentAmount);
-                levelTiles.Add(gameInfo.LevelConfigs[level].TilesContents[_randTile]);
-            }
-            Debug.Log("LEVEL TILES :" + levelTiles.Count);
-
-
-            valueToFind = levelTiles[UnityEngine.Random.Range(0, levelTiles.Count)].Value;
-            Debug.Log("VALUE TO FIND  :" + valueToFind);
-
-            tileGrid.Generate(gridSize);
+            int _randTile = UnityEngine.Random.Range(0, _contentAmount);
+            levelTilesContent.Add(gameInfo.LevelConfigs[level].TilesContents[_randTile]);
         }
-        else
-            throw new Exception("Tiles amount equals '0', change the grid size");
+    }
 
+    void SetTilesContent(List<Tile> _tiles, List<TileContent> _levelTiles) 
+    {
+        for (int i = 0; i < _tiles.Count; i++)
+        {
+            _tiles[i].SetTileContent(_levelTiles[i]);
+        }
+    }
+
+    void SetTargetValue(List<Tile> _tiles)
+    {
+        targetValue = levelTilesContent[UnityEngine.Random.Range(0, levelTilesContent.Count)].Value;
+        valueText.text = targetValue.ToString();
     }
 }

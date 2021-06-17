@@ -11,7 +11,6 @@ public class TileGrid : MonoBehaviour
 
     public List<Tile> Tiles { get; private set; }
     public Vector2Int Size { get; private set; }
-    public Tile[,] TilesArray { get; private set; }
 
     float rootFitterY = 0.5f;
     float rootFitterX = 0.5f;
@@ -24,7 +23,6 @@ public class TileGrid : MonoBehaviour
         }
 
         Size = _size;
-        TilesArray = new Tile[_size.x, _size.y];
         Tiles = new List<Tile>((int)(_size.x * _size.y));
 
         for (int x = 0; x < _size.x; x++)
@@ -34,7 +32,6 @@ public class TileGrid : MonoBehaviour
                 var _tile = Instantiate(tilePrefab, rootTr).GetComponent<Tile>();
                 _tile.SetPosition(new Vector2Int(x, y));
 
-                TilesArray[x, y] = _tile;
                 Tiles.Add(_tile);
             }
         }

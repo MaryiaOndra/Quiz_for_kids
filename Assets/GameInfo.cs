@@ -35,8 +35,9 @@ public class TileContent
     char value;
 
     [SerializeField]
-    Sprite sprite;
+    Sprite tileSprite;
 
     public char Value => value;
+    public Sprite TileSprite => tileSprite;
 
 }

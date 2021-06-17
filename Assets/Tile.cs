@@ -6,19 +6,15 @@ public class Tile : MonoBehaviour
 {
     const float FIT_DELAY = 1.5f;
 
+    [SerializeField]
     SpriteRenderer tileSpriteRndr;
        
     public char TileValue { get; private set; }
 
-    void Awake()
+    public void SetTileContent(TileContent _tileContent)
     {
-        tileSpriteRndr = GetComponent<SpriteRenderer>();
-    }
-
-    public void SetTileContent(char _value, Sprite _sprite)
-    {
-        TileValue = _value;
-        tileSpriteRndr.sprite = _sprite;
+        TileValue = _tileContent.Value;
+        tileSpriteRndr.sprite = _tileContent.TileSprite;
     }
 
     public void SetPosition(Vector2Int _position) 
