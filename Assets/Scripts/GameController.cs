@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -15,6 +17,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     TMP_Text valueText;
 
+    [SerializeField]
+    RestartPanel restartPanel;
+
     int level = 0;
 
     int prevRandomTile;
@@ -22,12 +27,19 @@ public class GameController : MonoBehaviour
 
     List<TileContent> levelTilesContent;
 
-    char targetValue;
-    List<char> UsedTiles = new List<char>();
+    string targetValue;
+    List<string> UsedTiles = new List<string>();
 
     private void Start()
     {
         StartGame();
+
+        restartPanel.RestartAction = RestartGame;
+    }
+
+    void RestartGame() 
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void StartGame()
@@ -43,20 +55,28 @@ public class GameController : MonoBehaviour
         tileGrid.Tiles.ForEach(_tile => _tile.TilePressedAction = CheckTileValue);
     }
 
-    void CheckTileValue(char _value)
+    void CheckTileValue(string _value)
     {
         if (_value == targetValue)
         {
-            level++;
-            StartGame();
+
+            if (level < gameInfo.LevelConfigs.Count - 1)
+            {
+                level++;
+                StartGame();
+            }
+            else
+                restartPanel.Activate();
         }
-        else
-            Debug.Log("WRONG");
     }
 
-    void ChooseTileContent(List<TileContent> _tileContents, int _tilesAmount) 
+    void ChooseTileContent(List<TilesContentConfig> _tileContentsConfigs, int _tilesAmount) 
     {
-        int _contentAmount = gameInfo.LevelConfigs[level].TilesContents.Count;
+        int _numOfConfig = UnityEngine.Random.Range(0, _tileContentsConfigs.Count);
+
+        List<TileContent> _tileContents = _tileContentsConfigs[_numOfConfig].TilesContents;
+
+        int _contentAmount = _tileContents.Count;
 
         levelTilesContent = new List<TileContent>();
 
@@ -64,7 +84,7 @@ public class GameController : MonoBehaviour
         {            
             int _randomTile = UnityEngine.Random.Range(0, _contentAmount);
 
-            levelTilesContent.Add(gameInfo.LevelConfigs[level].TilesContents[_randomTile]);
+            levelTilesContent.Add(_tileContents[_randomTile]);
             prevRandomTile = _randomTile;
         }
     }
@@ -80,7 +100,7 @@ public class GameController : MonoBehaviour
     void SetTargetValue(List<Tile> _tiles)
     {
         targetValue = levelTilesContent[UnityEngine.Random.Range(0, levelTilesContent.Count)].Value;
-        valueText.text = targetValue.ToString();
+        valueText.text = targetValue;
         UsedTiles.Add(targetValue);
     }
 }

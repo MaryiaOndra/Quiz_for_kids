@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "My Levels Config", menuName = "Quiz/Create level Config")]
-public class TilesContent : ScriptableObject
+public class TilesContentConfig : ScriptableObject
 {
     [SerializeField]
     List<TileContent> tilesContents;
@@ -16,12 +16,12 @@ public class TilesContent : ScriptableObject
 public class TileContent
 {
     [SerializeField]
-    char value;
+    string value;
 
     [SerializeField]
     Sprite tileSprite;
 
-    public char Value => value;
+    public string Value => value;
     public Sprite TileSprite => tileSprite;
 
 }

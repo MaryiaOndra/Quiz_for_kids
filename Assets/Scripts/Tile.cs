@@ -10,9 +10,9 @@ public class Tile : MonoBehaviour
     [SerializeField]
     SpriteRenderer tileSpriteRndr;
 
-    public Action<char> TilePressedAction;
+    public Action<string> TilePressedAction;
 
-    public char TileValue { get; private set; }
+    public string TileValue { get; private set; }
 
     public void SetTileContent(TileContent _tileContent)
     {
