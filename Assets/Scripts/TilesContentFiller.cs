@@ -5,10 +5,10 @@ using UnityEngine;
 public class TilesContentFiller
 {
     List<TileContent> tilesContents;
-
     List<int> tileNumbers;    
     List<int> targetNumbers = new List<int>();
     List<Tile> gridTiles;
+
     public int TargetNumber { get; private set; }
     public string TargetValue { get; private set; }
 

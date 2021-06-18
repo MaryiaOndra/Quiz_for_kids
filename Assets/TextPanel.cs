@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using DG.Tweening;
 using UnityEngine;
@@ -31,6 +29,11 @@ public class TextPanel : MonoBehaviour
 
         titleText.DOFade(ALPHA_MAX, FADE_TIME);
         valueText.DOFade(ALPHA_MAX, FADE_TIME);
+    }
+
+    public void Disappear()
+    {
+        gameObject.SetActive(false);
     }
 
     public void ShowValue(string _value) 

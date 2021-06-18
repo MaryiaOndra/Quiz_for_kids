@@ -8,15 +8,15 @@ public class LoadingPanel : MonoBehaviour, IFade
     const int ALPHA_MAX = 1;
     const int ALPHA_MIN = 0;
 
-    public Action LoadScreenAction;
-    public Action UnLoadScreenAction;
-
     [SerializeField]
     Image screenImage;
 
     [Header("Animation")]
     [SerializeField]
     float fadeDuration = 1.5f;
+
+    public Action LoadScreenAction;
+    public Action UnLoadScreenAction;
 
     public void FadeIn()
     {
@@ -25,7 +25,6 @@ public class LoadingPanel : MonoBehaviour, IFade
 
     public void FadeOut()
     {
-        screenImage.DOFade(ALPHA_MAX, 0);
         screenImage.DOFade(ALPHA_MIN, fadeDuration).OnComplete(LoadScreenAction.Invoke); ;
     }
 }

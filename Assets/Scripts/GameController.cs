@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
@@ -24,12 +20,8 @@ public class GameController : MonoBehaviour
     RestartPanel restartPanel;
 
     int level = 0;
-    int prevRandomTile;
     string targetValue;
     Vector2Int gridSize;
-
-    List<Tile> levelTiles;
-    List<string> UsedTiles = new List<string>();
     List<int> targetIndexes = new List<int>();
 
     void Start()
@@ -52,10 +44,17 @@ public class GameController : MonoBehaviour
     {
         tileGrid.Appear();
         textPanel.Appear();
-    }
+    }   
+
+    void TilesDisappearing() 
+    {
+        tileGrid.Disappear();
+        textPanel.Disappear();
+    }   
 
     void RestartGame()
     {
+        TilesDisappearing();
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 
@@ -71,7 +70,7 @@ public class GameController : MonoBehaviour
 
             int _numOfConfig = UnityEngine.Random.Range(0, gameInfo.LevelConfigs.Count - 1);
             List<TileContent> _tilesContents = gameInfo.TilesContents[_numOfConfig].TilesContents;
-
+  
             TilesContentFiller _tilesContentFiller = new TilesContentFiller(_tilesContents, _levelTiles);
             _tilesContentFiller.GenerateTileContent();
             targetIndexes.Add(_tilesContentFiller.SetTargetValue(targetIndexes));

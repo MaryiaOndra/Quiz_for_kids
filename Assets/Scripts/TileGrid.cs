@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,17 @@ public class TileGrid : MonoBehaviour
     GameObject tilePrefab;
     [SerializeField]
     Transform rootTr;
+    [SerializeField]
+    Animator gridAnimator;
+
+    [Header("RootFitter")]
+    [SerializeField]
+    float rootFitterY = 0.5f;
+    [SerializeField]
+    float rootFitterX = 0.5f;
 
     public List<Tile> Tiles { get; private set; }
     public Vector2Int Size { get; private set; }
-
-    float rootFitterY = 0.5f;
-    float rootFitterX = 0.5f;
 
     public void Generate(Vector2Int _size)
     {
@@ -45,11 +51,16 @@ public class TileGrid : MonoBehaviour
             rootTr.localPosition = new Vector3(-_size.x * rootFitterX, -_size.y * rootFitterY);
 
         gameObject.SetActive(false);
+        gameObject.transform.localScale = Vector3.zero;
     }
 
     public void Appear() 
     {
-        gameObject.SetActive(true);
-        transform.DOPunchScale(Vector3.one * 0.5f, 1f, 3, 1).SetDelay(0.1f);
+        gameObject.SetActive(true);       
+    }
+
+    public void Disappear()
+    {
+        gameObject.SetActive(false);
     }
 }

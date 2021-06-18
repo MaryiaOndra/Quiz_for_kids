@@ -15,9 +15,11 @@ public class Tile : MonoBehaviour
 
     [Header("Animation")]
     [SerializeField]
-    float duration;
+    float shakeDuration =1f;   
     [SerializeField]
-    Ease shakeEase;   
+    float bounceDuration = 0.5f;   
+    [SerializeField]
+    float duration = 0.5f;
     [SerializeField]
     Ease bounceEase;
 
@@ -35,7 +37,6 @@ public class Tile : MonoBehaviour
     public void SetPosition(Vector2Int _position) 
     {
         transform.localPosition = new Vector3(_position.x * FIT_DELAY, _position.y * FIT_DELAY);
-
     }
 
     public void OnPressed() 
@@ -46,7 +47,7 @@ public class Tile : MonoBehaviour
     public void ShakeTile() 
     {
         tileSpriteRndr.gameObject.transform
-            .DOShakeRotation(1f, 60, 5, 90);
+            .DOShakeRotation(shakeDuration, 60, 5, 90);
     }
 
     public void BounceTile() 
@@ -54,7 +55,7 @@ public class Tile : MonoBehaviour
         starParticle.SetActive(true);
 
         tileSpriteRndr.gameObject.transform
-            .DOScale(Vector3.one * 1.3f, 0.5f)
+            .DOScale(Vector3.one * 1.3f, bounceDuration)
             .SetEase(bounceEase)
             .SetLoops(3, LoopType.Yoyo)
             .OnComplete(CompleteEffects);
@@ -63,7 +64,6 @@ public class Tile : MonoBehaviour
     void CompleteEffects() 
     {
         starParticle.SetActive(false);
-        tileSpriteRndr.gameObject.transform.DOScale(Vector3.one, 0.5f).OnComplete(NextLevelAction.Invoke);
+        tileSpriteRndr.gameObject.transform.DOScale(Vector3.one, bounceDuration).OnComplete(NextLevelAction.Invoke);
     }
-
 }
