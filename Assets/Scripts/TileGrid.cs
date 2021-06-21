@@ -10,8 +10,6 @@ public class TileGrid : MonoBehaviour
     GameObject tilePrefab;
     [SerializeField]
     Transform rootTr;
-    [SerializeField]
-    Animator gridAnimator;
 
     [Header("RootFitter")]
     [SerializeField]
